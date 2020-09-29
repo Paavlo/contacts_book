@@ -1,24 +1,5 @@
 # contacts_book
 
-## Project setup
-```
-npm install
-```
+[DEMO-LINK](https://Paavlo.github.io/contacts_book/)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Powered by Vue.
