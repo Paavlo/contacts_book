@@ -93,6 +93,10 @@ import store from '@/store';
 export default {
   name: 'ContactDetails',
 
+  title() {
+    return `${this.contact.name}'s number`;
+  },
+
   components: {
     Modal,
     AddNewProperty,

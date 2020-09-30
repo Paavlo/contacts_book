@@ -1,8 +1,11 @@
 import Vue from 'vue';
 import VueConfirmDialog from 'vue-confirm-dialog';
-import App from './App.vue';
-import router from './router';
-import store from './store';
+import titleMixin from '@/mixins/titleMixin';
+import App from '@/App.vue';
+import router from '@/router';
+import store from '@/store';
+
+Vue.mixin(titleMixin);
 
 Vue.config.productionTip = false;
 Vue.use(VueConfirmDialog);

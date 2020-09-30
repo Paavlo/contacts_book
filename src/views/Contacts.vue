@@ -28,6 +28,8 @@ import Modal from '@/components/Modal.vue';
 export default {
   name: 'Contacts',
 
+  title: 'Contacts',
+
   components: {
     Modal,
     ContactsList,
