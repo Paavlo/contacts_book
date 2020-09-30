@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueConfirmDialog from 'vue-confirm-dialog';
-import titleMixin from '@/mixins/titleMixin';
+import titleMixin from '@/styles/titleMixin';
 import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store';

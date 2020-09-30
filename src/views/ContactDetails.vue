@@ -1,11 +1,5 @@
 <template>
   <section class="details">
-    <router-link
-      to="/"
-      v-show="!editing"
-      class="goBackBtn"
-      title="Contacts Book"
-    ></router-link>
 
     <modal v-show="addProperty" @click.native.self="addPropertyStatus">
       <add-new-property
@@ -24,15 +18,8 @@
     </div>
     <div class="detailsList">
 
-      <button
-        class="detailsList__undoBtn"
-        v-if="this.$store.state.history.length && !editing"
-        @click="undo"
-      >
-      </button>
-
         <div v-if="!editing">
-          <h2>{{ contact.name }}</h2>
+          <h2 class="detailsList__name">{{ contact.name }}</h2>
           <template v-for="(value, key) in contact">
             <div
               v-if="key !== 'id' && key !== 'name'"
@@ -45,10 +32,9 @@
               </div>
 
               <button
-                class="detailsList__del-btn"
+                class="detailsList__delProp"
                 @click="removeProperty(key)"
               >
-                Delete
               </button>
             </div>
           </template>
@@ -66,6 +52,20 @@
         <button
           class="detailsList__editBtn"
           @click="editContactInfo"
+        >
+        </button>
+
+        <button
+          class="detailsList__delContact"
+          @click.prevent="askDelete(contact.id)"
+        >
+          Delete contact
+        </button>
+
+        <button
+          class="detailsList__undoBtn"
+          v-if="this.$store.state.history.length && !editing"
+          @click="undo"
         >
         </button>
       </div>
@@ -131,10 +131,28 @@ export default {
     ...mapMutations({
       saveHistory: 'saveHistory',
       deleteKey: 'deleteKey',
+      removeContact: 'removeContact',
     }),
 
     undo() {
       this.takeHistory();
+    },
+
+    askDelete(index) {
+      Vue.$confirm({
+        title: 'Are you sure?',
+        message: 'Are you sure to delete the contact?',
+        button: {
+          yes: 'Yes',
+          no: 'Cancel',
+        },
+        callback: (confirm) => {
+          if (confirm) {
+            this.removeContact(index);
+            this.$router.push({ path: '/' });
+          }
+        },
+      });
     },
 
     removeProperty(key) {
@@ -174,36 +192,40 @@ export default {
 </script>
 
 <style lang="scss">
-  .goBackBtn {
-    position: absolute;
-    left: 10px;
-    top: 30px;
-    width: 50px;
-    height: 50px;
-    background-image: url("../assets/contactBook-icon.png");
-    background-size: cover;
-  }
 
   .details {
+    @include contentBox;
     position: relative;
-    background: #e8e8e8;
-    max-width: 1024px;
-    min-width: 500px;
-    min-height: 100vh;
-    padding: 20px;
+    background: $mainSectionsBackground;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 auto;
 
     &List {
       width: 100%;
 
+      &__name {
+        color: $mainBlueColor;
+      }
+
       &__btn {
-        width: 150px;
+        width: 300px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
+      }
+
+      &__delContact {
+        border: 1px solid lightgrey;
+        border-radius: 20px;
+        transition: 0.2s;
+        font-weight: 700;
+        font-size: 1rem;
+
+        &:hover {
+          transform: scale(1.1);
+          background-color: lightgrey;
+        }
       }
 
       &__addProp {
@@ -213,53 +235,38 @@ export default {
         background-image: url("../assets/undo_icon.png");
       }
       &__editBtn {
-        background-image: url("../assets/editContact_icon.jpg");
+        background-image: url("../assets/edit.svg");
       }
-
+      &__delProp {
+        background-image: url("../assets/garbage.svg");
+      }
       &__addProp,
       &__undoBtn,
-      &__editBtn {
-        width: 50px;
-        height: 50px;
-        border-radius: 20px;
-        border: 1px solid lightgrey;
-        background-size: cover;
-
-        &:hover {
-          background-color: lightgrey;
-        }
+      &__editBtn,
+      &__delProp {
+        @include btnIconsStyle;
       }
 
-      &__undoBtn {
-        position: absolute;
-        left: 80px;
-        top: 30px;
-      }
-
-      &__del-btn {
-        border: none;
-        padding: 5px;
-        font-weight: 700;
-        cursor: pointer;
-        border-radius: 20px;
-        background: #fc3d39;
-        transition: 0.2s;
-        z-index: 5;
-
-        &:hover {
-          background: #e03633;
-        }
+      &__delProp {
+        width: 40px;
+        height: 40px;
       }
 
       &__item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         padding: 10px;
         background: snow;
+        color: black;
         border-radius: 10px;
         text-align: left;
+        transition: 0.2s;
+
+        &:hover {
+          box-shadow: 0 0 10px 0 $mainBlueColor;
+        }
       }
 
       &__keys {

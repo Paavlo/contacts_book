@@ -2,7 +2,7 @@
   <ul class="contactsList">
     <vue-confirm-dialog class="left"></vue-confirm-dialog>
     <li
-      v-for="(contact, index) in contacts"
+      v-for="contact in contacts"
       :key="contact.id"
       :title="contact.name"
     >
@@ -10,20 +10,14 @@
         :to="{ name: 'Details', params: { id: contact.id } }"
       >
         <div class="contactsList__item">
-          <div class="contactsList__info">
-            <h3 class="contactsList__info__name">
-              {{ contact.name }}
-            </h3>
-          </div>
-
-          <div class="contactList__btn">
-            <button
-              class="contactsList__btn__del"
-              @click.prevent="askDelete(index)"
-            >
-              Delete contact
-            </button>
-          </div>
+          <img
+            src="../assets/avatar.svg"
+            alt=""
+            class="contactsList__info__avatar"
+          >
+          <h3 class="contactsList__info__name">
+            {{ contact.name }}
+          </h3>
         </div>
       </router-link>
     </li>
@@ -31,9 +25,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import { mapMutations } from 'vuex';
-import store from '../store';
+import store from '@/store';
 
 export default {
   name: 'ContanctsList',
@@ -48,33 +40,16 @@ export default {
       return store.getters.getContacts;
     },
   },
-  methods: {
-    ...mapMutations({
-      removeContact: 'removeContact',
-    }),
-
-    askDelete(index) {
-      Vue.$confirm({
-        title: 'Are you sure?',
-        message: 'Are you sure to delete the contact?',
-        button: {
-          yes: 'Yes',
-          no: 'Cancel',
-        },
-        callback: (confirm) => {
-          if (confirm) {
-            this.removeContact(index);
-          }
-        },
-      });
-    },
-  },
 };
 </script>
 
 <style scoped lang="scss">
   .contactsList {
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    grid-gap: 20px;
+    justify-content: center;
 
     & a {
       text-decoration: none;
@@ -82,35 +57,44 @@ export default {
     }
 
     &__item {
+      height: 200px;
+      padding: 10px;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: space-around;
       align-items: center;
       background: #fffafa;
-      padding: 10px;
       cursor: pointer;
       transition: 0.3s;
-      margin-bottom: 5px;
-      border-radius: 5px;
+      border-radius: 20px;
 
       &:hover {
-        background: #efeded;
+        transform: scale(1.03);
+        background: #e0e0e0;
       }
     }
 
     &__info {
-      height: content-box;
-      display: flex;
-      align-items: center;
-      width: 50%;
-
       &__name {
-        text-align: left;
-        width: 100px;
+        position: relative;
+        color: $mainBlueColor;
+        text-align: center;
+        width: 100%;
         margin: 0;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: -5px;
+          display: block;
+          width: 100%;
+          height: 1px;
+          background: #2c3e50;
+        }
       }
 
-      &__tel {
-        margin: 0 0 0 40px;
+      &__avatar {
+        margin-bottom: 10px;
       }
     }
 

@@ -9,7 +9,9 @@
       :key="key"
     >
 
-      {{ key !== 'id' ? `New value for ${key}` : null }}
+      <span class="edit__key">
+        {{ key !== 'id' ? key : null }}
+      </span>
 
       <input
         class="edit__item"
@@ -97,7 +99,6 @@ export default {
 <style scoped lang="scss">
  .edit {
    width: 100%;
-   background: #e8e8e8;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -107,12 +108,17 @@ export default {
      text-align: left;
    }
 
+   &__key {
+     text-transform: capitalize;
+     font-weight: 500;
+   }
+
    &__item {
      display: flex;
      justify-content: space-between;
      width: 100%;
      align-items: center;
-     margin-bottom: 10px;
+     margin-bottom: 15px;
      padding: 10px;
      background: snow;
      border-radius: 10px;
@@ -125,15 +131,16 @@ export default {
 
    &__btn {
      width: 50%;
-     border: none;
      padding: 10px;
      font-weight: 700;
      cursor: pointer;
+     background: #e0e0e0;
+     color: $mainBlueColor;
      transition: 0.2s;
+     border: 1px solid gray;
 
      &-no {
        border-radius: 0 10px 10px 0;
-       background: #53d769;
 
        &:hover {
          background: #4fcc64;
@@ -142,7 +149,6 @@ export default {
 
      &-yes {
        border-radius: 10px 0 0 10px;
-       background: #fc3d39;
 
        &:hover {
          background: #e03633;

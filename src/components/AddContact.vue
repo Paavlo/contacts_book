@@ -84,7 +84,7 @@ export default {
     &__input {
       width: 100%;
       padding: 5px;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
       background: #e2e2e2;
       border: 1px solid whitesmoke;
       border-radius: 10px;
@@ -96,13 +96,14 @@ export default {
     }
 
     &__addBtn {
-      border: none;
       padding: 5px;
       font-weight: 700;
       cursor: pointer;
       border-radius: 20px;
-      background: #53d769;
+      background: #e0e0e0;
+      color: $mainBlueColor;
       transition: 0.2s;
+      border: 1px solid gray;
 
       &:hover {
         background: #4fcc64;

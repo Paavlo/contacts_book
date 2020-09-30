@@ -53,15 +53,11 @@ export default {
 
 <style scoped lang="scss">
   .contacts {
-    background: #e8e8e8;
-    max-width: 1024px;
-    min-width: 500px;
-    min-height: 100vh;
-    padding: 20px;
+    @include contentBox;
+    background: $mainSectionsBackground;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 auto;
 
     &__showAddForm {
       width: 50px;
@@ -69,10 +65,14 @@ export default {
       border-radius: 20px;
       border: 1px solid lightgrey;
       background-image: url('../assets/addcontact-icon.svg');
-      background-size: cover;
+      background-size: 80%;
+      background-repeat: no-repeat;
+      background-position: center;
       cursor: pointer;
+      transition: 0.2s;
 
       &:hover {
+        transform: scale(1.03);
         background-color: lightgrey;
       }
     }
