@@ -69,8 +69,9 @@ export default {
       border-radius: 20px;
 
       &:hover {
-        transform: scale(1.03);
-        background: #e0e0e0;
+        box-shadow: 0 0 2px 2px $mainBlueColor;
+        transform: scale(1.04);
+        background: #e8e8e8;
       }
     }
 

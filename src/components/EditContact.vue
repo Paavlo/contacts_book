@@ -123,6 +123,8 @@ export default {
      background: snow;
      border-radius: 10px;
      text-align: left;
+
+     @include inputActive;
    }
 
    &__holder-btn {
@@ -134,7 +136,7 @@ export default {
      padding: 10px;
      font-weight: 700;
      cursor: pointer;
-     background: #e0e0e0;
+     background: #e1e1e1;
      color: $mainBlueColor;
      transition: 0.2s;
      border: 1px solid gray;

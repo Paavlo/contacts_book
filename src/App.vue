@@ -26,6 +26,10 @@
     margin: 0 20px;
   }
 
+  button {
+    outline: none ;
+  }
+
   #app {
     margin: 0;
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -41,6 +45,11 @@
 
   li {
     list-style: none;
+  }
+
+  a {
+    outline: none;
+    text-decoration: none;
   }
 
   .container {

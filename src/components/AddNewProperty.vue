@@ -83,6 +83,8 @@ export default {
       border-radius: 10px;
       transition: 0.3s;
 
+      @include inputActive;
+
       &:hover {
         background: #d3d3d3;
       }

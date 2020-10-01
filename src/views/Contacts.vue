@@ -60,16 +60,9 @@ export default {
     align-items: center;
 
     &__showAddForm {
-      width: 50px;
-      height: 50px;
-      border-radius: 20px;
-      border: 1px solid lightgrey;
+      @include btnIconsStyle;
       background-image: url('../assets/addcontact-icon.svg');
-      background-size: 80%;
-      background-repeat: no-repeat;
-      background-position: center;
       cursor: pointer;
-      transition: 0.2s;
 
       &:hover {
         transform: scale(1.03);

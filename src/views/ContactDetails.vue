@@ -221,10 +221,15 @@ export default {
         transition: 0.2s;
         font-weight: 700;
         font-size: 1rem;
+        cursor: pointer;
 
         &:hover {
           transform: scale(1.1);
           background-color: lightgrey;
+        }
+
+        &:active {
+          box-shadow: 0 0 2px 2px $mainBlueColor;
         }
       }
 
