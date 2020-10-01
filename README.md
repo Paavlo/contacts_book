@@ -1,7 +1,5 @@
 # contacts_book
 
-[DEMO-LINK](https://Paavlo.github.io/contacts_book/)
-
 Project was created, using:
 - Vue.js
 - VueX
