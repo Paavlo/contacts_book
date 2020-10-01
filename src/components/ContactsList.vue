@@ -29,12 +29,14 @@ import store from '@/store';
 
 export default {
   name: 'ContanctsList',
+
   data() {
     return {
       showConfirm: false,
       selectedContact: null,
     };
   },
+
   computed: {
     contacts() {
       return store.getters.getContacts;

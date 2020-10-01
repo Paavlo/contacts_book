@@ -14,6 +14,22 @@
   </div>
 </template>
 
+<script>
+export default {
+  beforeCreate() {
+    if (localStorage.getItem('contacts')) {
+      const storage = JSON.parse(localStorage.getItem('contacts'));
+      if (
+        !this.$store.state.allContacts.length
+        && storage.length > 0
+      ) {
+        this.$store.commit('loadStorage', ...storage);
+      }
+    }
+  },
+};
+</script>
+
 <style lang="scss">
 
   * {

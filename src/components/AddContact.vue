@@ -21,7 +21,7 @@
         type="tel"
         placeholder="Enter number (+380XXXXXXXXX)"
         pattern="(\+380[0-9]{9})"
-        v-model.trim="newContact.tel"
+        v-model.trim="newContact.number"
         required
       />
     </label>
@@ -46,7 +46,7 @@ export default {
     return {
       newContact: {
         name: '',
-        tel: '',
+        number: '',
         id: +new Date(),
       },
     };
@@ -60,7 +60,7 @@ export default {
     addContact() {
       this.addNewContact({ ...this.newContact });
       this.newContact.name = '';
-      this.newContact.tel = '';
+      this.newContact.number = '';
       this.hideForm();
     },
   },

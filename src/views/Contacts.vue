@@ -15,7 +15,11 @@
       ></add-contact>
     </modal>
 
-    <contacts-list></contacts-list>
+    <h1
+      v-if="!this.$store.state.allContacts.length"
+      class="contacts__noContact"
+    >Add your first contact</h1>
+    <contacts-list v-else></contacts-list>
 
   </section>
 </template>
@@ -58,6 +62,10 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &__noContact {
+      color: $mainBlueColor;
+    }
 
     &__showAddForm {
       @include btnIconsStyle;

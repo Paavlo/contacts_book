@@ -10,7 +10,9 @@
     >
 
       <span class="edit__key">
-        {{ key !== 'id' ? key : null }}
+        {{
+        key !== 'id' ? key : null
+        }}
       </span>
 
       <input

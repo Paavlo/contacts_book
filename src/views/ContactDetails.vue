@@ -18,7 +18,7 @@
     </div>
     <div class="detailsList">
 
-        <div v-if="!editing">
+        <div v-if="!editing && contact">
           <h2 class="detailsList__name">{{ contact.name }}</h2>
           <template v-for="(value, key) in contact">
             <div
@@ -27,7 +27,7 @@
               class="detailsList__item"
             >
               <div class="detailsList__keys">
-                <h3 class="detailsList__keys-key">{{ key === 'tel' ? 'Number' : key }}</h3>
+                <h3 class="detailsList__keys-key">{{ key }}</h3>
                 <p class="detailsList__keys-value">{{ value }}</p>
               </div>
 
@@ -38,38 +38,38 @@
               </button>
             </div>
           </template>
+
+          <div
+                  class="detailsList__btn"
+                  v-if="!editing"
+          >
+            <button
+                    class="detailsList__addProp"
+                    @click="addPropertyStatus"
+            >
+            </button>
+            <button
+                    class="detailsList__editBtn"
+                    @click="editContactInfo"
+            >
+            </button>
+
+            <button
+                    class="detailsList__delContact"
+                    @click.prevent="askDelete(contact)"
+            >
+              Delete contact
+            </button>
+
+            <button
+                    class="detailsList__undoBtn"
+                    v-if="this.$store.state.history.length && !editing"
+                    @click="undo"
+            >
+            </button>
+          </div>
         </div>
-
-      <div
-        class="detailsList__btn"
-        v-if="!editing"
-      >
-        <button
-          class="detailsList__addProp"
-          @click="addPropertyStatus"
-        >
-        </button>
-        <button
-          class="detailsList__editBtn"
-          @click="editContactInfo"
-        >
-        </button>
-
-        <button
-          class="detailsList__delContact"
-          @click.prevent="askDelete(contact.id)"
-        >
-          Delete contact
-        </button>
-
-        <button
-          class="detailsList__undoBtn"
-          v-if="this.$store.state.history.length && !editing"
-          @click="undo"
-        >
-        </button>
-      </div>
-    </div>
+        </div>
 
     <edit-contact
       v-if="editing"
@@ -94,7 +94,7 @@ export default {
   name: 'ContactDetails',
 
   title() {
-    return `${this.contact.name}'s number`;
+    return this.contact ? `${this.contact.name}'s number` : 'No contact';
   },
 
   components: {
@@ -105,7 +105,6 @@ export default {
 
   data() {
     return {
-      currentContact: this.contact,
       editing: false,
       addProperty: false,
       editedValues: {},
@@ -118,6 +117,9 @@ export default {
     },
 
     contact() {
+      if (!store.state.allContacts.length) {
+        return null;
+      }
       return store.getters.getContact(+this.contactId);
     },
   },
@@ -138,7 +140,7 @@ export default {
       this.takeHistory();
     },
 
-    askDelete(index) {
+    askDelete(selectedContact) {
       Vue.$confirm({
         title: 'Are you sure?',
         message: 'Are you sure to delete the contact?',
@@ -148,7 +150,7 @@ export default {
         },
         callback: (confirm) => {
           if (confirm) {
-            this.removeContact(index);
+            this.removeContact(selectedContact);
             this.$router.push({ path: '/' });
           }
         },
