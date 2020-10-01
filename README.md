@@ -2,4 +2,12 @@
 
 [DEMO-LINK](https://Paavlo.github.io/contacts_book/)
 
-Powered by Vue.
+Project was created, using:
+- Vue.js
+- VueX
+- JS
+- HTML
+- SCSS
+
+
+You can see the work of the application here - [Contacts Book](https://paavlo.github.io/contacts_book) 
